@@ -47,29 +47,29 @@ class MiniGameParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'game'", "'sprite'", "'at'", "'('", "','", 
-                     "')'", "'image'", "'on'", "'key'", "'do'", "'move'", 
-                     "'by'", "'if'", "'collision'", "'then'", "'end'", "'show'", 
-                     "'stop'" ]
+    literalNames = [ "<INVALID>", "'juego'", "'sprite'", "'en'", "'('", 
+                     "','", "')'", "'imagen'", "'al'", "'presionar'", "'hacer'", 
+                     "'mover'", "'por'", "'si'", "'colisionan'", "'entonces'", 
+                     "'fin'", "'mostrar'", "'detener'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "ID", "STRING", 
-                      "INT", "NEWLINE", "WS" ]
+                      "<INVALID>", "<INVALID>", "<INVALID>", "ID", "CADENA", 
+                      "NUM", "NL", "ESPACIOS" ]
 
     RULE_program = 0
-    RULE_statement = 1
-    RULE_spriteDecl = 2
-    RULE_eventHandler = 3
-    RULE_action = 4
-    RULE_collisionStmt = 5
-    RULE_showStmt = 6
-    RULE_stopStmt = 7
+    RULE_instruccion = 1
+    RULE_crearSprite = 2
+    RULE_eventoTecla = 3
+    RULE_accion = 4
+    RULE_colision = 5
+    RULE_mostrarTexto = 6
+    RULE_detener = 7
 
-    ruleNames =  [ "program", "statement", "spriteDecl", "eventHandler", 
-                   "action", "collisionStmt", "showStmt", "stopStmt" ]
+    ruleNames =  [ "program", "instruccion", "crearSprite", "eventoTecla", 
+                   "accion", "colision", "mostrarTexto", "detener" ]
 
     EOF = Token.EOF
     T__0=1
@@ -91,10 +91,10 @@ class MiniGameParser ( Parser ):
     T__16=17
     T__17=18
     ID=19
-    STRING=20
-    INT=21
-    NEWLINE=22
-    WS=23
+    CADENA=20
+    NUM=21
+    NL=22
+    ESPACIOS=23
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -112,20 +112,20 @@ class MiniGameParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def STRING(self):
-            return self.getToken(MiniGameParser.STRING, 0)
+        def CADENA(self):
+            return self.getToken(MiniGameParser.CADENA, 0)
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
         def EOF(self):
             return self.getToken(MiniGameParser.EOF, 0)
 
-        def statement(self, i:int=None):
+        def instruccion(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(MiniGameParser.StatementContext)
+                return self.getTypedRuleContexts(MiniGameParser.InstruccionContext)
             else:
-                return self.getTypedRuleContext(MiniGameParser.StatementContext,i)
+                return self.getTypedRuleContext(MiniGameParser.InstruccionContext,i)
 
 
         def getRuleIndex(self):
@@ -150,15 +150,15 @@ class MiniGameParser ( Parser ):
             self.state = 16
             self.match(MiniGameParser.T__0)
             self.state = 17
-            self.match(MiniGameParser.STRING)
+            self.match(MiniGameParser.CADENA)
             self.state = 18
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
             self.state = 22
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & 401668) != 0):
                 self.state = 19
-                self.statement()
+                self.instruccion()
                 self.state = 24
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -174,49 +174,49 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class StatementContext(ParserRuleContext):
+    class InstruccionContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def spriteDecl(self):
-            return self.getTypedRuleContext(MiniGameParser.SpriteDeclContext,0)
+        def crearSprite(self):
+            return self.getTypedRuleContext(MiniGameParser.CrearSpriteContext,0)
 
 
-        def eventHandler(self):
-            return self.getTypedRuleContext(MiniGameParser.EventHandlerContext,0)
+        def eventoTecla(self):
+            return self.getTypedRuleContext(MiniGameParser.EventoTeclaContext,0)
 
 
-        def collisionStmt(self):
-            return self.getTypedRuleContext(MiniGameParser.CollisionStmtContext,0)
+        def colision(self):
+            return self.getTypedRuleContext(MiniGameParser.ColisionContext,0)
 
 
-        def showStmt(self):
-            return self.getTypedRuleContext(MiniGameParser.ShowStmtContext,0)
+        def mostrarTexto(self):
+            return self.getTypedRuleContext(MiniGameParser.MostrarTextoContext,0)
 
 
-        def stopStmt(self):
-            return self.getTypedRuleContext(MiniGameParser.StopStmtContext,0)
+        def detener(self):
+            return self.getTypedRuleContext(MiniGameParser.DetenerContext,0)
 
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_statement
+            return MiniGameParser.RULE_instruccion
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
+            if hasattr( visitor, "visitInstruccion" ):
+                return visitor.visitInstruccion(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def statement(self):
+    def instruccion(self):
 
-        localctx = MiniGameParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_statement)
+        localctx = MiniGameParser.InstruccionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 2, self.RULE_instruccion)
         try:
             self.state = 32
             self._errHandler.sync(self)
@@ -224,27 +224,27 @@ class MiniGameParser ( Parser ):
             if token in [2]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 27
-                self.spriteDecl()
+                self.crearSprite()
                 pass
             elif token in [8]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 28
-                self.eventHandler()
+                self.eventoTecla()
                 pass
             elif token in [13]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 29
-                self.collisionStmt()
+                self.colision()
                 pass
             elif token in [17]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 30
-                self.showStmt()
+                self.mostrarTexto()
                 pass
             elif token in [18]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 31
-                self.stopStmt()
+                self.detener()
                 pass
             else:
                 raise NoViableAltException(self)
@@ -258,7 +258,7 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class SpriteDeclContext(ParserRuleContext):
+    class CrearSpriteContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -268,34 +268,34 @@ class MiniGameParser ( Parser ):
         def ID(self):
             return self.getToken(MiniGameParser.ID, 0)
 
-        def INT(self, i:int=None):
+        def NUM(self, i:int=None):
             if i is None:
-                return self.getTokens(MiniGameParser.INT)
+                return self.getTokens(MiniGameParser.NUM)
             else:
-                return self.getToken(MiniGameParser.INT, i)
+                return self.getToken(MiniGameParser.NUM, i)
 
-        def STRING(self):
-            return self.getToken(MiniGameParser.STRING, 0)
+        def CADENA(self):
+            return self.getToken(MiniGameParser.CADENA, 0)
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_spriteDecl
+            return MiniGameParser.RULE_crearSprite
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSpriteDecl" ):
-                return visitor.visitSpriteDecl(self)
+            if hasattr( visitor, "visitCrearSprite" ):
+                return visitor.visitCrearSprite(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def spriteDecl(self):
+    def crearSprite(self):
 
-        localctx = MiniGameParser.SpriteDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_spriteDecl)
+        localctx = MiniGameParser.CrearSpriteContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_crearSprite)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 34
@@ -307,19 +307,19 @@ class MiniGameParser ( Parser ):
             self.state = 37
             self.match(MiniGameParser.T__3)
             self.state = 38
-            self.match(MiniGameParser.INT)
+            self.match(MiniGameParser.NUM)
             self.state = 39
             self.match(MiniGameParser.T__4)
             self.state = 40
-            self.match(MiniGameParser.INT)
+            self.match(MiniGameParser.NUM)
             self.state = 41
             self.match(MiniGameParser.T__5)
             self.state = 42
             self.match(MiniGameParser.T__6)
             self.state = 43
-            self.match(MiniGameParser.STRING)
+            self.match(MiniGameParser.CADENA)
             self.state = 44
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -329,39 +329,39 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class EventHandlerContext(ParserRuleContext):
+    class EventoTeclaContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def STRING(self):
-            return self.getToken(MiniGameParser.STRING, 0)
+        def CADENA(self):
+            return self.getToken(MiniGameParser.CADENA, 0)
 
-        def action(self):
-            return self.getTypedRuleContext(MiniGameParser.ActionContext,0)
+        def accion(self):
+            return self.getTypedRuleContext(MiniGameParser.AccionContext,0)
 
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_eventHandler
+            return MiniGameParser.RULE_eventoTecla
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEventHandler" ):
-                return visitor.visitEventHandler(self)
+            if hasattr( visitor, "visitEventoTecla" ):
+                return visitor.visitEventoTecla(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def eventHandler(self):
+    def eventoTecla(self):
 
-        localctx = MiniGameParser.EventHandlerContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_eventHandler)
+        localctx = MiniGameParser.EventoTeclaContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 6, self.RULE_eventoTecla)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 46
@@ -369,13 +369,13 @@ class MiniGameParser ( Parser ):
             self.state = 47
             self.match(MiniGameParser.T__8)
             self.state = 48
-            self.match(MiniGameParser.STRING)
+            self.match(MiniGameParser.CADENA)
             self.state = 49
             self.match(MiniGameParser.T__9)
             self.state = 50
-            self.action()
+            self.accion()
             self.state = 51
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -385,7 +385,7 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class ActionContext(ParserRuleContext):
+    class AccionContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -395,28 +395,28 @@ class MiniGameParser ( Parser ):
         def ID(self):
             return self.getToken(MiniGameParser.ID, 0)
 
-        def INT(self, i:int=None):
+        def NUM(self, i:int=None):
             if i is None:
-                return self.getTokens(MiniGameParser.INT)
+                return self.getTokens(MiniGameParser.NUM)
             else:
-                return self.getToken(MiniGameParser.INT, i)
+                return self.getToken(MiniGameParser.NUM, i)
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_action
+            return MiniGameParser.RULE_accion
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAction" ):
-                return visitor.visitAction(self)
+            if hasattr( visitor, "visitAccion" ):
+                return visitor.visitAccion(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def action(self):
+    def accion(self):
 
-        localctx = MiniGameParser.ActionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_action)
+        localctx = MiniGameParser.AccionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_accion)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 53
@@ -428,11 +428,11 @@ class MiniGameParser ( Parser ):
             self.state = 56
             self.match(MiniGameParser.T__3)
             self.state = 57
-            self.match(MiniGameParser.INT)
+            self.match(MiniGameParser.NUM)
             self.state = 58
             self.match(MiniGameParser.T__4)
             self.state = 59
-            self.match(MiniGameParser.INT)
+            self.match(MiniGameParser.NUM)
             self.state = 60
             self.match(MiniGameParser.T__5)
         except RecognitionException as re:
@@ -444,7 +444,7 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class CollisionStmtContext(ParserRuleContext):
+    class ColisionContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -457,32 +457,32 @@ class MiniGameParser ( Parser ):
             else:
                 return self.getToken(MiniGameParser.ID, i)
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
-        def statement(self, i:int=None):
+        def instruccion(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(MiniGameParser.StatementContext)
+                return self.getTypedRuleContexts(MiniGameParser.InstruccionContext)
             else:
-                return self.getTypedRuleContext(MiniGameParser.StatementContext,i)
+                return self.getTypedRuleContext(MiniGameParser.InstruccionContext,i)
 
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_collisionStmt
+            return MiniGameParser.RULE_colision
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCollisionStmt" ):
-                return visitor.visitCollisionStmt(self)
+            if hasattr( visitor, "visitColision" ):
+                return visitor.visitColision(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def collisionStmt(self):
+    def colision(self):
 
-        localctx = MiniGameParser.CollisionStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_collisionStmt)
+        localctx = MiniGameParser.ColisionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 10, self.RULE_colision)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
@@ -503,13 +503,13 @@ class MiniGameParser ( Parser ):
             self.state = 69
             self.match(MiniGameParser.T__14)
             self.state = 70
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
             self.state = 74
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & 401668) != 0):
                 self.state = 71
-                self.statement()
+                self.instruccion()
                 self.state = 76
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -525,43 +525,43 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class ShowStmtContext(ParserRuleContext):
+    class MostrarTextoContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def STRING(self):
-            return self.getToken(MiniGameParser.STRING, 0)
+        def CADENA(self):
+            return self.getToken(MiniGameParser.CADENA, 0)
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_showStmt
+            return MiniGameParser.RULE_mostrarTexto
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShowStmt" ):
-                return visitor.visitShowStmt(self)
+            if hasattr( visitor, "visitMostrarTexto" ):
+                return visitor.visitMostrarTexto(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def showStmt(self):
+    def mostrarTexto(self):
 
-        localctx = MiniGameParser.ShowStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_showStmt)
+        localctx = MiniGameParser.MostrarTextoContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 12, self.RULE_mostrarTexto)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 79
             self.match(MiniGameParser.T__16)
             self.state = 80
-            self.match(MiniGameParser.STRING)
+            self.match(MiniGameParser.CADENA)
             self.state = 81
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -571,38 +571,38 @@ class MiniGameParser ( Parser ):
         return localctx
 
 
-    class StopStmtContext(ParserRuleContext):
+    class DetenerContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NEWLINE(self):
-            return self.getToken(MiniGameParser.NEWLINE, 0)
+        def NL(self):
+            return self.getToken(MiniGameParser.NL, 0)
 
         def getRuleIndex(self):
-            return MiniGameParser.RULE_stopStmt
+            return MiniGameParser.RULE_detener
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStopStmt" ):
-                return visitor.visitStopStmt(self)
+            if hasattr( visitor, "visitDetener" ):
+                return visitor.visitDetener(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def stopStmt(self):
+    def detener(self):
 
-        localctx = MiniGameParser.StopStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_stopStmt)
+        localctx = MiniGameParser.DetenerContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_detener)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 83
             self.match(MiniGameParser.T__17)
             self.state = 84
-            self.match(MiniGameParser.NEWLINE)
+            self.match(MiniGameParser.NL)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

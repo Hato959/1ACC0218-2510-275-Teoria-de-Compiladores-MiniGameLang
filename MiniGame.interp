@@ -1,23 +1,23 @@
 token literal names:
 null
-'game'
+'juego'
 'sprite'
-'at'
+'en'
 '('
 ','
 ')'
-'image'
-'on'
-'key'
-'do'
-'move'
-'by'
-'if'
-'collision'
-'then'
-'end'
-'show'
-'stop'
+'imagen'
+'al'
+'presionar'
+'hacer'
+'mover'
+'por'
+'si'
+'colisionan'
+'entonces'
+'fin'
+'mostrar'
+'detener'
 null
 null
 null
@@ -45,20 +45,20 @@ null
 null
 null
 ID
-STRING
-INT
-NEWLINE
-WS
+CADENA
+NUM
+NL
+ESPACIOS
 
 rule names:
 program
-statement
-spriteDecl
-eventHandler
-action
-collisionStmt
-showStmt
-stopStmt
+instruccion
+crearSprite
+eventoTecla
+accion
+colision
+mostrarTexto
+detener
 
 
 atn:

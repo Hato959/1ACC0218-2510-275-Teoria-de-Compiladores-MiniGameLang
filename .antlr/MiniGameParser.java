@@ -1,4 +1,4 @@
-// Generated from c:/Users/aaron/Desktop/Compiladores/MiniGame.g4 by ANTLR 4.13.1
+// Generated from c:/Users/aaron/Documents/GitHub/1ACC0218-2510-275-Teoria-de-Compiladores-MiniGameLang/MiniGame.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,31 +18,31 @@ public class MiniGameParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, ID=19, STRING=20, INT=21, NEWLINE=22, WS=23;
+		T__17=18, ID=19, CADENA=20, NUM=21, NL=22, ESPACIOS=23;
 	public static final int
-		RULE_program = 0, RULE_statement = 1, RULE_spriteDecl = 2, RULE_eventHandler = 3, 
-		RULE_action = 4, RULE_collisionStmt = 5, RULE_showStmt = 6, RULE_stopStmt = 7;
+		RULE_program = 0, RULE_instruccion = 1, RULE_crearSprite = 2, RULE_eventoTecla = 3, 
+		RULE_accion = 4, RULE_colision = 5, RULE_mostrarTexto = 6, RULE_detener = 7;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "statement", "spriteDecl", "eventHandler", "action", "collisionStmt", 
-			"showStmt", "stopStmt"
+			"program", "instruccion", "crearSprite", "eventoTecla", "accion", "colision", 
+			"mostrarTexto", "detener"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'game'", "'sprite'", "'at'", "'('", "','", "')'", "'image'", "'on'", 
-			"'key'", "'do'", "'move'", "'by'", "'if'", "'collision'", "'then'", "'end'", 
-			"'show'", "'stop'"
+			null, "'juego'", "'sprite'", "'en'", "'('", "','", "')'", "'imagen'", 
+			"'al'", "'presionar'", "'hacer'", "'mover'", "'por'", "'si'", "'colisionan'", 
+			"'entonces'", "'fin'", "'mostrar'", "'detener'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, "ID", "STRING", "INT", "NEWLINE", 
-			"WS"
+			null, null, null, null, null, null, null, "ID", "CADENA", "NUM", "NL", 
+			"ESPACIOS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -98,14 +98,14 @@ public class MiniGameParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(MiniGameParser.STRING, 0); }
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
+		public TerminalNode CADENA() { return getToken(MiniGameParser.CADENA, 0); }
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
 		public TerminalNode EOF() { return getToken(MiniGameParser.EOF, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<InstruccionContext> instruccion() {
+			return getRuleContexts(InstruccionContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public InstruccionContext instruccion(int i) {
+			return getRuleContext(InstruccionContext.class,i);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -123,9 +123,9 @@ public class MiniGameParser extends Parser {
 			setState(16);
 			match(T__0);
 			setState(17);
-			match(STRING);
+			match(CADENA);
 			setState(18);
-			match(NEWLINE);
+			match(NL);
 			setState(22);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -133,7 +133,7 @@ public class MiniGameParser extends Parser {
 				{
 				{
 				setState(19);
-				statement();
+				instruccion();
 				}
 				}
 				setState(24);
@@ -156,31 +156,31 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class StatementContext extends ParserRuleContext {
-		public SpriteDeclContext spriteDecl() {
-			return getRuleContext(SpriteDeclContext.class,0);
+	public static class InstruccionContext extends ParserRuleContext {
+		public CrearSpriteContext crearSprite() {
+			return getRuleContext(CrearSpriteContext.class,0);
 		}
-		public EventHandlerContext eventHandler() {
-			return getRuleContext(EventHandlerContext.class,0);
+		public EventoTeclaContext eventoTecla() {
+			return getRuleContext(EventoTeclaContext.class,0);
 		}
-		public CollisionStmtContext collisionStmt() {
-			return getRuleContext(CollisionStmtContext.class,0);
+		public ColisionContext colision() {
+			return getRuleContext(ColisionContext.class,0);
 		}
-		public ShowStmtContext showStmt() {
-			return getRuleContext(ShowStmtContext.class,0);
+		public MostrarTextoContext mostrarTexto() {
+			return getRuleContext(MostrarTextoContext.class,0);
 		}
-		public StopStmtContext stopStmt() {
-			return getRuleContext(StopStmtContext.class,0);
+		public DetenerContext detener() {
+			return getRuleContext(DetenerContext.class,0);
 		}
-		public StatementContext(ParserRuleContext parent, int invokingState) {
+		public InstruccionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_statement; }
+		@Override public int getRuleIndex() { return RULE_instruccion; }
 	}
 
-	public final StatementContext statement() throws RecognitionException {
-		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_statement);
+	public final InstruccionContext instruccion() throws RecognitionException {
+		InstruccionContext _localctx = new InstruccionContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_instruccion);
 		try {
 			setState(32);
 			_errHandler.sync(this);
@@ -189,35 +189,35 @@ public class MiniGameParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(27);
-				spriteDecl();
+				crearSprite();
 				}
 				break;
 			case T__7:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(28);
-				eventHandler();
+				eventoTecla();
 				}
 				break;
 			case T__12:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(29);
-				collisionStmt();
+				colision();
 				}
 				break;
 			case T__16:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(30);
-				showStmt();
+				mostrarTexto();
 				}
 				break;
 			case T__17:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(31);
-				stopStmt();
+				detener();
 				}
 				break;
 			default:
@@ -236,23 +236,23 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class SpriteDeclContext extends ParserRuleContext {
+	public static class CrearSpriteContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(MiniGameParser.ID, 0); }
-		public List<TerminalNode> INT() { return getTokens(MiniGameParser.INT); }
-		public TerminalNode INT(int i) {
-			return getToken(MiniGameParser.INT, i);
+		public List<TerminalNode> NUM() { return getTokens(MiniGameParser.NUM); }
+		public TerminalNode NUM(int i) {
+			return getToken(MiniGameParser.NUM, i);
 		}
-		public TerminalNode STRING() { return getToken(MiniGameParser.STRING, 0); }
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
-		public SpriteDeclContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode CADENA() { return getToken(MiniGameParser.CADENA, 0); }
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
+		public CrearSpriteContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_spriteDecl; }
+		@Override public int getRuleIndex() { return RULE_crearSprite; }
 	}
 
-	public final SpriteDeclContext spriteDecl() throws RecognitionException {
-		SpriteDeclContext _localctx = new SpriteDeclContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_spriteDecl);
+	public final CrearSpriteContext crearSprite() throws RecognitionException {
+		CrearSpriteContext _localctx = new CrearSpriteContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_crearSprite);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -265,19 +265,19 @@ public class MiniGameParser extends Parser {
 			setState(37);
 			match(T__3);
 			setState(38);
-			match(INT);
+			match(NUM);
 			setState(39);
 			match(T__4);
 			setState(40);
-			match(INT);
+			match(NUM);
 			setState(41);
 			match(T__5);
 			setState(42);
 			match(T__6);
 			setState(43);
-			match(STRING);
+			match(CADENA);
 			setState(44);
-			match(NEWLINE);
+			match(NL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -292,21 +292,21 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class EventHandlerContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(MiniGameParser.STRING, 0); }
-		public ActionContext action() {
-			return getRuleContext(ActionContext.class,0);
+	public static class EventoTeclaContext extends ParserRuleContext {
+		public TerminalNode CADENA() { return getToken(MiniGameParser.CADENA, 0); }
+		public AccionContext accion() {
+			return getRuleContext(AccionContext.class,0);
 		}
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
-		public EventHandlerContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
+		public EventoTeclaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_eventHandler; }
+		@Override public int getRuleIndex() { return RULE_eventoTecla; }
 	}
 
-	public final EventHandlerContext eventHandler() throws RecognitionException {
-		EventHandlerContext _localctx = new EventHandlerContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_eventHandler);
+	public final EventoTeclaContext eventoTecla() throws RecognitionException {
+		EventoTeclaContext _localctx = new EventoTeclaContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_eventoTecla);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -315,13 +315,13 @@ public class MiniGameParser extends Parser {
 			setState(47);
 			match(T__8);
 			setState(48);
-			match(STRING);
+			match(CADENA);
 			setState(49);
 			match(T__9);
 			setState(50);
-			action();
+			accion();
 			setState(51);
-			match(NEWLINE);
+			match(NL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -336,21 +336,21 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ActionContext extends ParserRuleContext {
+	public static class AccionContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(MiniGameParser.ID, 0); }
-		public List<TerminalNode> INT() { return getTokens(MiniGameParser.INT); }
-		public TerminalNode INT(int i) {
-			return getToken(MiniGameParser.INT, i);
+		public List<TerminalNode> NUM() { return getTokens(MiniGameParser.NUM); }
+		public TerminalNode NUM(int i) {
+			return getToken(MiniGameParser.NUM, i);
 		}
-		public ActionContext(ParserRuleContext parent, int invokingState) {
+		public AccionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_action; }
+		@Override public int getRuleIndex() { return RULE_accion; }
 	}
 
-	public final ActionContext action() throws RecognitionException {
-		ActionContext _localctx = new ActionContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_action);
+	public final AccionContext accion() throws RecognitionException {
+		AccionContext _localctx = new AccionContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_accion);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -363,11 +363,11 @@ public class MiniGameParser extends Parser {
 			setState(56);
 			match(T__3);
 			setState(57);
-			match(INT);
+			match(NUM);
 			setState(58);
 			match(T__4);
 			setState(59);
-			match(INT);
+			match(NUM);
 			setState(60);
 			match(T__5);
 			}
@@ -384,27 +384,27 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class CollisionStmtContext extends ParserRuleContext {
+	public static class ColisionContext extends ParserRuleContext {
 		public List<TerminalNode> ID() { return getTokens(MiniGameParser.ID); }
 		public TerminalNode ID(int i) {
 			return getToken(MiniGameParser.ID, i);
 		}
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
+		public List<InstruccionContext> instruccion() {
+			return getRuleContexts(InstruccionContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public InstruccionContext instruccion(int i) {
+			return getRuleContext(InstruccionContext.class,i);
 		}
-		public CollisionStmtContext(ParserRuleContext parent, int invokingState) {
+		public ColisionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_collisionStmt; }
+		@Override public int getRuleIndex() { return RULE_colision; }
 	}
 
-	public final CollisionStmtContext collisionStmt() throws RecognitionException {
-		CollisionStmtContext _localctx = new CollisionStmtContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_collisionStmt);
+	public final ColisionContext colision() throws RecognitionException {
+		ColisionContext _localctx = new ColisionContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_colision);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -426,7 +426,7 @@ public class MiniGameParser extends Parser {
 			setState(69);
 			match(T__14);
 			setState(70);
-			match(NEWLINE);
+			match(NL);
 			setState(74);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -434,7 +434,7 @@ public class MiniGameParser extends Parser {
 				{
 				{
 				setState(71);
-				statement();
+				instruccion();
 				}
 				}
 				setState(76);
@@ -457,27 +457,27 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ShowStmtContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(MiniGameParser.STRING, 0); }
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
-		public ShowStmtContext(ParserRuleContext parent, int invokingState) {
+	public static class MostrarTextoContext extends ParserRuleContext {
+		public TerminalNode CADENA() { return getToken(MiniGameParser.CADENA, 0); }
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
+		public MostrarTextoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_showStmt; }
+		@Override public int getRuleIndex() { return RULE_mostrarTexto; }
 	}
 
-	public final ShowStmtContext showStmt() throws RecognitionException {
-		ShowStmtContext _localctx = new ShowStmtContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_showStmt);
+	public final MostrarTextoContext mostrarTexto() throws RecognitionException {
+		MostrarTextoContext _localctx = new MostrarTextoContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_mostrarTexto);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(79);
 			match(T__16);
 			setState(80);
-			match(STRING);
+			match(CADENA);
 			setState(81);
-			match(NEWLINE);
+			match(NL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -492,24 +492,24 @@ public class MiniGameParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class StopStmtContext extends ParserRuleContext {
-		public TerminalNode NEWLINE() { return getToken(MiniGameParser.NEWLINE, 0); }
-		public StopStmtContext(ParserRuleContext parent, int invokingState) {
+	public static class DetenerContext extends ParserRuleContext {
+		public TerminalNode NL() { return getToken(MiniGameParser.NL, 0); }
+		public DetenerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_stopStmt; }
+		@Override public int getRuleIndex() { return RULE_detener; }
 	}
 
-	public final StopStmtContext stopStmt() throws RecognitionException {
-		StopStmtContext _localctx = new StopStmtContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_stopStmt);
+	public final DetenerContext detener() throws RecognitionException {
+		DetenerContext _localctx = new DetenerContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_detener);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(83);
 			match(T__17);
 			setState(84);
-			match(NEWLINE);
+			match(NL);
 			}
 		}
 		catch (RecognitionException re) {

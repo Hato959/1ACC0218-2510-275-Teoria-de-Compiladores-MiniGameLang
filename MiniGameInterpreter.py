@@ -1,66 +1,76 @@
-from MiniGameVisitor import MiniGameVisitor
+from antlr4 import *
+from MiniGameLexer import MiniGameLexer
 from MiniGameParser import MiniGameParser
+from MiniGameVisitor import MiniGameVisitor
 
 class MiniGameInterpreter(MiniGameVisitor):
     def __init__(self):
-        self.sprites = {}  # Almacenar los sprites creados
-        self.running = True  # Estado del juego
+        self.sprites = {}
+        self.running = True
 
     def visitProgram(self, ctx: MiniGameParser.ProgramContext):
-        # Obtener el nombre del juego (el primer STRING en la regla program)
-        game_name = ctx.STRING().getText().strip('"')
+        game_name = ctx.CADENA().getText().strip('"')
         print(f"🎮 Iniciando juego: {game_name}")
-        return self.visitChildren(ctx)
+        for instr in ctx.instruccion():
+            self.visit(instr)
+        return None
 
-    def visitSpriteDecl(self, ctx: MiniGameParser.SpriteDeclContext):
-        # Crea un sprite a partir de su declaración
+    def visitCrearSprite(self, ctx: MiniGameParser.CrearSpriteContext):
         sprite_name = ctx.ID().getText()
-        x = int(ctx.INT(0).getText())
-        y = int(ctx.INT(1).getText())
-        image = ctx.STRING().getText().strip('"')
+        x = int(ctx.NUM(0).getText())
+        y = int(ctx.NUM(1).getText())
+        image = ctx.CADENA().getText().strip('"')
         self.sprites[sprite_name] = {"x": x, "y": y, "image": image}
         print(f"🧱 Sprite '{sprite_name}' creado en ({x}, {y}) con imagen '{image}'")
-        return self.visitChildren(ctx)
+        return None
 
-    def visitEventHandler(self, ctx: MiniGameParser.EventHandlerContext):
-        # Obtener la tecla que activará el evento
-        key = ctx.STRING().getText().strip('"')  # El nombre de la tecla entre comillas
-        action = ctx.action()  # Obtenemos la acción
+    def visitEventoTecla(self, ctx: MiniGameParser.EventoTeclaContext):
+        key = ctx.CADENA().getText().strip('"')
+        print(f"🕹️ Evento: al presionar '{key}' → ejecutando acción")
 
-        # Imprimir el evento de tecla
-        print(f"🕹️ Evento de tecla '{key}' → ejecutando acción")
+        action_ctx = ctx.accion()
+        if action_ctx:
+            self.visit(action_ctx)
+        return None
 
-        # Comprobar que la acción es 'move' y extraer los valores correspondientes
-        if isinstance(action, MiniGameParser.ActionContext):
-            sprite_name = action.ID().getText()  # Nombre del sprite
-            dx = int(action.INT(0).getText())  # Movimiento en el eje X
-            dy = int(action.INT(1).getText())  # Movimiento en el eje Y
+    def visitAccion(self, ctx: MiniGameParser.AccionContext):
+        sprite_name = ctx.ID().getText()
+        dx = int(ctx.NUM(0).getText())
+        dy = int(ctx.NUM(1).getText())
 
-            # Asegurarse de que el sprite existe
-            if sprite_name in self.sprites:
-                sprite = self.sprites[sprite_name]
-                sprite["x"] += dx  # Mover el sprite
-                sprite["y"] += dy
-                print(f"➡️  '{sprite_name}' se movió a ({sprite['x']}, {sprite['y']})")
-            else:
-                print(f"⚠️ El sprite '{sprite_name}' no existe.")
-        
-        return self.visitChildren(ctx)
+        if sprite_name in self.sprites:
+            sprite = self.sprites[sprite_name]
+            sprite["x"] += dx
+            sprite["y"] += dy
+            print(f"➡️  '{sprite_name}' se movió a ({sprite['x']}, {sprite['y']})")
+        else:
+            print(f"⚠️ El sprite '{sprite_name}' no existe.")
+        return None
 
-    def visitCollisionStmt(self, ctx: MiniGameParser.CollisionStmtContext):
-        # Comprobación de colisiones entre dos sprites
-        sprite1_name = ctx.ID(0).getText()  # Primer ID (sprite 1)
-        sprite2_name = ctx.ID(1).getText()  # Segundo ID (sprite 2)
+    def visitColision(self, ctx: MiniGameParser.ColisionContext):
+        sprite1_name = ctx.ID(0).getText()
+        sprite2_name = ctx.ID(1).getText()
 
         if sprite1_name in self.sprites and sprite2_name in self.sprites:
-            sprite1 = self.sprites[sprite1_name]
-            sprite2 = self.sprites[sprite2_name]
-
-            # Verifica si hay colisión (simulando que las coordenadas son iguales para colisión)
-            if (sprite1["x"] == sprite2["x"] and sprite1["y"] == sprite2["y"]):
+            s1 = self.sprites[sprite1_name]
+            s2 = self.sprites[sprite2_name]
+            if s1["x"] == s2["x"] and s1["y"] == s2["y"]:
                 print(f"❌ Colisión entre '{sprite1_name}' y '{sprite2_name}'!")
+
+                for instr in ctx.instruccion():
+                    self.visit(instr)
             else:
                 print(f"✅ No hay colisión entre '{sprite1_name}' y '{sprite2_name}'")
+        else:
+            print(f"⚠️ Uno de los sprites no existe para verificar colisión.")
+        return None
 
-        return self.visitChildren(ctx)
+    def visitMostrarTexto(self, ctx: MiniGameParser.MostrarTextoContext):
+        texto = ctx.CADENA().getText().strip('"')
+        print(f"💬 Mostrar: {texto}")
+        return None
 
+    def visitDetener(self, ctx: MiniGameParser.DetenerContext):
+        print("⏹️ Juego detenido.")
+        self.running = False
+        return None

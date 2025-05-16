@@ -1,30 +1,30 @@
 grammar MiniGame;
 
-program       : 'game' STRING NEWLINE statement* EOF ;
+program       : 'juego' CADENA NL instruccion* EOF ;
 
-statement
-    : spriteDecl
-    | eventHandler
-    | collisionStmt
-    | showStmt
-    | stopStmt
+instruccion
+    : crearSprite
+    | eventoTecla
+    | colision
+    | mostrarTexto
+    | detener
     ;
 
-spriteDecl    : 'sprite' ID 'at' '(' INT ',' INT ')' 'image' STRING NEWLINE ;
+crearSprite    : 'sprite' ID 'en' '(' NUM ',' NUM ')' 'imagen' CADENA NL ;
 
-eventHandler  : 'on' 'key' STRING 'do' action NEWLINE ;
+eventoTecla    : 'al' 'presionar' CADENA 'hacer' accion NL ;
 
-action        : 'move' ID 'by' '(' INT ',' INT ')' ;
+accion         : 'mover' ID 'por' '(' NUM ',' NUM ')' ;
 
-collisionStmt : 'if' 'collision' '(' ID ',' ID ')' 'then' NEWLINE statement* 'end' ;
+colision       : 'si' 'colisionan' '(' ID ',' ID ')' 'entonces' NL instruccion* 'fin' ;
 
-showStmt      : 'show' STRING NEWLINE ;
+mostrarTexto   : 'mostrar' CADENA NL ;
 
-stopStmt      : 'stop' NEWLINE ;
+detener        : 'detener' NL ;
 
-ID            : [a-zA-Z_][a-zA-Z_0-9]* ;
-STRING        : '"' (~["\r\n])* '"' ;
-INT           : [0-9]+ ;
+ID             : [a-zA-Z_][a-zA-Z_0-9]* ;
+CADENA         : '"' (~["\r\n])* '"' ;
+NUM            : [0-9]+ ;
 
-NEWLINE       : ('\r'? '\n')+ ;
-WS            : [ \t]+ -> skip ;
+NL             : ('\r'? '\n')+ ;
+ESPACIOS       : [ \t]+ -> skip ;

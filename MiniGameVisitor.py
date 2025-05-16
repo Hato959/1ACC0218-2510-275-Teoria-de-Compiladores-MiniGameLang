@@ -14,38 +14,38 @@ class MiniGameVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#statement.
-    def visitStatement(self, ctx:MiniGameParser.StatementContext):
+    # Visit a parse tree produced by MiniGameParser#instruccion.
+    def visitInstruccion(self, ctx:MiniGameParser.InstruccionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#spriteDecl.
-    def visitSpriteDecl(self, ctx:MiniGameParser.SpriteDeclContext):
+    # Visit a parse tree produced by MiniGameParser#crearSprite.
+    def visitCrearSprite(self, ctx:MiniGameParser.CrearSpriteContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#eventHandler.
-    def visitEventHandler(self, ctx:MiniGameParser.EventHandlerContext):
+    # Visit a parse tree produced by MiniGameParser#eventoTecla.
+    def visitEventoTecla(self, ctx:MiniGameParser.EventoTeclaContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#action.
-    def visitAction(self, ctx:MiniGameParser.ActionContext):
+    # Visit a parse tree produced by MiniGameParser#accion.
+    def visitAccion(self, ctx:MiniGameParser.AccionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#collisionStmt.
-    def visitCollisionStmt(self, ctx:MiniGameParser.CollisionStmtContext):
+    # Visit a parse tree produced by MiniGameParser#colision.
+    def visitColision(self, ctx:MiniGameParser.ColisionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#showStmt.
-    def visitShowStmt(self, ctx:MiniGameParser.ShowStmtContext):
+    # Visit a parse tree produced by MiniGameParser#mostrarTexto.
+    def visitMostrarTexto(self, ctx:MiniGameParser.MostrarTextoContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MiniGameParser#stopStmt.
-    def visitStopStmt(self, ctx:MiniGameParser.StopStmtContext):
+    # Visit a parse tree produced by MiniGameParser#detener.
+    def visitDetener(self, ctx:MiniGameParser.DetenerContext):
         return self.visitChildren(ctx)
 
 
